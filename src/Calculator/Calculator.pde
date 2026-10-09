@@ -1,4 +1,4 @@
-//Max Oyewole | Started 9/15/2026 | Calculator Project //<>//
+//Max Oyewole | Started 9/15/2026 | Calculator Project
 Button[] numButtons = new Button[10]; //numbers
 Button[] opButtons = new Button[12]; //operators
 float l, r, result;
@@ -143,6 +143,8 @@ void keyPressed() {
     handleEvent('8', true);
   } else if (keyCode == 57 || keyCode == 105) {
     handleEvent('9', true);
+  } else if (keyCode == 46 || keyCode == 110) {
+    handleEvent('.', false);
   }
 }
 
@@ -166,16 +168,16 @@ void handleEvent(char label, boolean isNum) {
     //Operator stuff
     String clicked = str(label);
 
-    if (clicked == "Enter") {
+    if (clicked.equals("Enter")) {
       //Perform calculation
       performCalc();
-    } else if (clicked == "+" || clicked == "-" ||
-      clicked == "x" || clicked == "÷" || clicked == "^" || clicked == "ln") {
+    } else if (clicked.equals("+") || clicked.equals("-") ||
+      clicked.equals("x") || clicked.equals("÷") || clicked.equals("^")) {
       op = clicked;
       left = false;
       newEntry = true;
       displayVal = op;
-    } else if (clicked == "±") {
+    } else if (clicked.equals("±")) {
       if (left) {
         l *= -1;
         displayVal = str(l);
@@ -183,7 +185,7 @@ void handleEvent(char label, boolean isNum) {
         r *= -1;
         displayVal = str(r);
       }
-    } else if (clicked == "Clear") {
+    } else if (clicked.equals("Clear")) {
       l = 0.0;
       r = 0.0;
       result = 0.0;
@@ -191,7 +193,7 @@ void handleEvent(char label, boolean isNum) {
       left = true;
       newEntry = true;
       displayVal = "0.0";
-    } else if (clicked == ".") {
+    } else if (clicked.equals(".")) {
       if (!displayVal.contains(".")) {
         if (left) {
           displayVal += ".";
@@ -201,7 +203,7 @@ void handleEvent(char label, boolean isNum) {
           r = float(displayVal);
         }
       }
-    } else if (clicked == "cos") {
+    } else if (clicked.equals("cos")) {
       if (left) {
         result = cos(l);
         l = cos(l);
@@ -211,7 +213,7 @@ void handleEvent(char label, boolean isNum) {
         r = cos(r);
         displayVal = str(result);
       }
-    } else if (clicked == "sin") {
+    } else if (clicked.equals("sin")) {
       if (left) {
         result = sin(l);
         l = sin(l);
@@ -221,7 +223,7 @@ void handleEvent(char label, boolean isNum) {
         r = sin(r);
         displayVal = str(result);
       }
-    } else if (clicked == "ln") {
+    } else if (clicked.equals("ln")) {
       if (left) {
         if (l <= 0) {
           displayVal = "ERROR: UNDEFINED";
