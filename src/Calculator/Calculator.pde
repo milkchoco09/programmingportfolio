@@ -85,16 +85,16 @@ void mouseReleased() {
 
 void performCalc() {
   //defining operator function
-  if (op == "+") {
+  if (op.equals("+")) {
     result = l + r;
     displayVal = str(result);
-  } else if (op == "-") {
+  } else if (op.equals("-")) {
     result = l - r;
     displayVal = str(result);
-  } else if (op == "x") {
+  } else if (op.equals("x")) {
     result = l * r;
     displayVal = str(result);
-  } else if (op == "÷") {
+  } else if (op.equals("÷")) {
     if (r == 0) {
       displayVal = "ERROR: DIVISION BY ZERO";
       newEntry = true;
@@ -102,7 +102,7 @@ void performCalc() {
       result = l / r;
       displayVal = str(result);
     }
-  } else if (op == "^") {
+  } else if (op.equals("^")) {
     if (l == 0 && r < 0) {
       displayVal = "ERROR: DIVISION BY ZERO";
       newEntry = true;
