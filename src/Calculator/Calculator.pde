@@ -7,7 +7,6 @@ String op, displayVal;
 void setup() {
   size(520, 640);
   background(180);
-  //rDeciLength = 0;
   l = 0.0;
   r = 0.0;
   result = 0.0;
@@ -33,7 +32,7 @@ void setup() {
   opButtons[5] = new Button(440, 520, "±", color(150), color(120));
   opButtons[6] = new Button(80, 600, "Clear", color(150, 50, 0), color(120, 40, 0));
   opButtons[7] = new Button(440, 600, "Enter", color(50, 150, 0), color(40, 120, 0));
-  opButtons[8] = new Button(80, 200, "^", color(150), color(120)); //_ means insert command here
+  opButtons[8] = new Button(80, 200, "^", color(150), color(120));
   opButtons[9] = new Button(200, 200, "ln", color(150), color(120));
   opButtons[10] = new Button(320, 200, "sin", color(150), color(120));
   opButtons[11] = new Button(440, 200, "cos", color(150), color(120));
