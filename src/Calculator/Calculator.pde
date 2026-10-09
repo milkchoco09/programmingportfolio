@@ -168,7 +168,7 @@ void handleEvent(char label, boolean isNum) {
     //Operator stuff
     String clicked = str(label);
 
-    if (clicked.equals("Enter")) {
+    if (clicked.equals("E")) { //E stands for Enter
       //Perform calculation
       performCalc();
     } else if (clicked.equals("+") || clicked.equals("-") ||
@@ -185,7 +185,7 @@ void handleEvent(char label, boolean isNum) {
         r *= -1;
         displayVal = str(r);
       }
-    } else if (clicked.equals("Clear")) {
+    } else if (clicked.equals("C")) { //C stands for Clear
       l = 0.0;
       r = 0.0;
       result = 0.0;
