@@ -9,8 +9,8 @@ This is a calculator with standard number buttons and operators with four extra 
 
 ## Current Status
 Working:
-- [A feature you have tested]
-- [Another feature you have tested]
+- Numbers with both the mouse and keyboard.
+- Functionality of the operators.
 
 Still in progress:
 - [A requirement you are finishing]
@@ -23,19 +23,15 @@ There is a main Calculator.pde file and a class Button.pde file.
 
 ## Controls
 Mouse:
-You can use the mouse to click on the buttons
+You can use the mouse to click on the buttons.
 
 Keyboard:
-[List keys that currently work and what they do.
-Identify planned controls as not yet implemented.]
+All the numbers and the decimal button work at this moment.
 
 ## Project Files
-[Identify the main sketch and other tabs or assets
-you will upload.]
-
+The main sketch is the Calculator and is has a Button class tab.
 ## Testing
-[Record one test: actions, expected result,
-and actual result.]
+I attempted to type the first five digits of pi. This worked as expected.
 
 ## Next Step
-[Name the specific behavior you will build or fix next.]
+I plan to implement all of the buttons
