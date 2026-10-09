@@ -1,5 +1,9 @@
 ## OOP Calculator for Programming 1
 
+![Calculator](https://github.com/milkchoco09/programmingportfolio/blob/main/images/CalculatorScreenshot.png?raw=true)
+
+[Link to source code]()
+
 ## Overview
 This is a calculator with standard number buttons and operators with four extra buttons. Those take one number to the power of another, the natural logarithm, the sine function, and the cosine function.
 
