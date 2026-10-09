@@ -17,14 +17,13 @@ Still in progress:
 
 ## How to Run
 Built with Processing.
-Processing version: [Your version]
+Processing version: 4.0.1
 
-[After the project files are uploaded, identify the
-project folder and main .pde file to open and run.]
+There is a main Calculator.pde file and a class Button.pde file.
 
 ## Controls
 Mouse:
-[Explain how to use the buttons.]
+You can use the mouse to click on the buttons
 
 Keyboard:
 [List keys that currently work and what they do.
