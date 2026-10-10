@@ -13,7 +13,7 @@ Working:
 - Functionality of the operators.
 
 Still in progress:
-- [A requirement you are finishing]
+- Linking all the operator buttons to the keyboard
 
 ## How to Run
 Built with Processing.
