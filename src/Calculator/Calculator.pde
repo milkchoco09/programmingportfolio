@@ -2,7 +2,7 @@
 Button[] numButtons = new Button[10]; //numbers
 Button[] opButtons = new Button[12]; //operators
 float l, r, result;
-boolean left, newEntry;
+boolean left, newEntry, maxEntry;
 String op, displayVal;
 void setup() {
   size(520, 640);
@@ -13,6 +13,7 @@ void setup() {
   op = " ";
   left = true;
   newEntry = true;
+  maxEntry = false;
   displayVal = "0.0";
   numButtons[0] = new Button(200, 520, "0", color(150), color(120));
   numButtons[1] = new Button(200, 440, "1", color(150), color(120));
@@ -57,6 +58,12 @@ void calcDisplay() {
   rect(40, 40, 440, 80);
   fill(0);
   text(displayVal, 480, 75);
+  if (maxEntry) {
+    fill(255);
+    textSize(15);
+    textAlign(CENTER, TOP);
+    text("The number in the display has reached its maximum length", 260, 120);
+  }
 }
 
 void mouseReleased() {
@@ -123,28 +130,50 @@ void performCalc() {
 
 void keyPressed() {
   println("keyCode:" + keyCode);
-  if (keyCode == 48 || keyCode == 96) {
+  if (key == '0' || keyCode == 96) { //one for the top, one for the numpad
     handleEvent('0', true);
-  } else if (keyCode == 49 || keyCode == 97) {
+  } else if (key == '1' || keyCode == 97) {//one number as not to interfere with SHIFT + 8
     handleEvent('1', true);
-  } else if (keyCode == 50 || keyCode == 98) {
+  } else if (key == '2' || keyCode == 98) {
     handleEvent('2', true);
-  } else if (keyCode == 51 || keyCode == 99) {
+  } else if (key == '3' || keyCode == 99) {
     handleEvent('3', true);
-  } else if (keyCode == 52 || keyCode == 100) {
+  } else if (key == '4' || keyCode == 100) {
     handleEvent('4', true);
-  } else if (keyCode == 53 || keyCode == 101) {
+  } else if (key == '5' || keyCode == 101) {
     handleEvent('5', true);
-  } else if (keyCode == 54 || keyCode == 102) {
+  } else if (key == '6' || keyCode == 102) {
     handleEvent('6', true);
-  } else if (keyCode == 55 || keyCode == 103) {
+  } else if (key == '7' || keyCode == 103) {
     handleEvent('7', true);
-  } else if (keyCode == 56 || keyCode == 104) {
+  } else if (key == '8' || keyCode == 104) {
     handleEvent('8', true);
-  } else if (keyCode == 57 || keyCode == 105) {
+  } else if (key == '9' || keyCode == 105) {
     handleEvent('9', true);
-  } else if (keyCode == 46 || keyCode == 110) {
+  } else if (key == '.') {
     handleEvent('.', false);
+  } else if (key == '+') {
+    handleEvent('+', false);
+  } else if (keyCode == 45) { // top '-' for subtraction
+    handleEvent('-', false);
+  } else if (key == '*') {
+    handleEvent('x', false);
+  } else if (key == '/') {
+    handleEvent('÷', false);
+  } else if (keyCode == 109) { // numpad '-' for negatives
+    handleEvent('±', false);
+  } else if (key == 'l') {
+    handleEvent('l', false);
+  } else if (key == 'c') {
+    handleEvent('c', false);
+  } else if (key == 's') {
+    handleEvent('s', false);
+  } else if (key == '^') {
+    handleEvent('^', false);
+  } else if (key == '=' || key == ENTER || key == RETURN) {
+    handleEvent('E', false);
+  } else if (key == BACKSPACE || key == DELETE) {
+    handleEvent('C', false);
   }
 }
 
@@ -157,7 +186,11 @@ void handleEvent(char label, boolean isNum) {
       displayVal = digit;
       newEntry = false;
     } else {
-      displayVal += digit;
+      if (displayVal.length() < 22) {
+        displayVal += digit;
+      } else {
+        maxEntry = true;
+      }
     }
     if (left) {
       l = float(displayVal);
@@ -203,7 +236,7 @@ void handleEvent(char label, boolean isNum) {
           r = float(displayVal);
         }
       }
-    } else if (clicked.equals("cos")) {
+    } else if (clicked.equals("c")) { //c stands for cosine
       if (left) {
         result = cos(l);
         l = cos(l);
@@ -213,7 +246,7 @@ void handleEvent(char label, boolean isNum) {
         r = cos(r);
         displayVal = str(result);
       }
-    } else if (clicked.equals("sin")) {
+    } else if (clicked.equals("s")) { //s stands for sine
       if (left) {
         result = sin(l);
         l = sin(l);
@@ -223,7 +256,7 @@ void handleEvent(char label, boolean isNum) {
         r = sin(r);
         displayVal = str(result);
       }
-    } else if (clicked.equals("ln")) {
+    } else if (clicked.equals("l")) { //l stands for ln
       if (left) {
         if (l <= 0) {
           displayVal = "ERROR: UNDEFINED";
@@ -244,5 +277,6 @@ void handleEvent(char label, boolean isNum) {
         }
       }
     }
+    maxEntry = false;
   }
 }
