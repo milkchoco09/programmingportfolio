@@ -182,7 +182,7 @@ void handleEvent(char label, boolean isNum) {
     // Number stuff
     String digit = str(label);
 
-    if (newEntry) {
+    if (newEntry || displayVal.equals("Infinity")) {
       displayVal = digit;
       newEntry = false;
     } else {
@@ -280,3 +280,17 @@ void handleEvent(char label, boolean isNum) {
     maxEntry = false;
   }
 }
+
+/* "l" is ln, "c" is cosine, and "s" is sine. Also, delete and backspace are both clear buttons
+1. The Calculator contains the basic numbers and operations as will as changing signs, sin,
+   cos, ln, and powers (x^y).
+2. Both keys and buttons on the display are assigned to numbers. Mouse to regions, and keys to
+  key values and keycodes.
+3. I fixed how operators are bound to the keyboard and allowed shift operators (Shift + 8 and
+   Shift + =) to function as intended on keyboard. I did this by combining checking key == 'i'
+   for the top of the keyboard and keyCode == j for the numpad. I went in and tested the
+   operators and they functioned as intended.
+4. I wanted to encompass as many basic functions as possible. If I wanted to improve this
+   calculator, I would need to add more operators, but that would require a redesign. I
+   do not see any other immedeate ways to improve this calculator.
+*/
