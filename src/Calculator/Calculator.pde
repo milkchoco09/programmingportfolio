@@ -7,6 +7,7 @@ String op, displayVal;
 void setup() {
   size(520, 640);
   background(180);
+  noSmooth();
   l = 0.0;
   r = 0.0;
   result = 0.0;
@@ -97,6 +98,7 @@ void performCalc() {
     if (r == 0) {
       displayVal = "ERROR: DIVISION BY ZERO";
       newEntry = true;
+      op = " ";
     } else {
       result = l / r;
       displayVal = str(result);
@@ -105,9 +107,11 @@ void performCalc() {
     if (l == 0 && r < 0) {
       displayVal = "ERROR: DIVISION BY ZERO";
       newEntry = true;
-    } else if (l < 0 && r*pow(10, 30)/pow(2, 30) % 2 == 0) {
+      op = " ";
+    } else if (l < 0 && (r*pow(10, 30)/pow(2, 30)) % 2 == 0) {
       displayVal = "ERROR: NONREAL ROOT";
       newEntry = true;
+      op = " ";
     } else {
       result = pow(l, r);
       displayVal = str(result);
@@ -178,8 +182,12 @@ void handleEvent(char label, boolean isNum) {
       displayVal = digit;
       newEntry = false;
     } else {
-      if (displayVal.length() < 22) {
-        displayVal += digit;
+      if (displayVal.equals("0") && label != '0') {
+        displayVal = digit;
+      } else if (displayVal.length() < 22) {
+        if (!displayVal.equals("0")) {
+          displayVal += digit;
+        }
       } else {
         maxEntry = true;
       }
@@ -192,80 +200,93 @@ void handleEvent(char label, boolean isNum) {
   } else {
     //Operator stuff
     String clicked = str(label);
-
-    if (clicked.equals("E")) { //E stands for Enter
-      //Perform calculation
-      performCalc();
-    } else if (clicked.equals("+") || clicked.equals("-") ||
-      clicked.equals("x") || clicked.equals("÷") || clicked.equals("^")) {
-      op = clicked;
-      left = false;
-      newEntry = true;
-      displayVal = op;
-    } else if (clicked.equals("±")) {
-      if (left) {
-        l *= -1;
-        displayVal = str(l);
-      } else {
-        r *= -1;
-        displayVal = str(r);
+    if (newEntry || displayVal.equals("Infinity")) {
+      if (clicked.equals("C")) { //C stands for Clear
+        l = 0.0;
+        r = 0.0;
+        result = 0.0;
+        op = " ";
+        left = true;
+        newEntry = true;
+        displayVal = "0.0";
       }
-    } else if (clicked.equals("C")) { //C stands for Clear
-      l = 0.0;
-      r = 0.0;
-      result = 0.0;
-      op = " ";
-      left = true;
-      newEntry = true;
-      displayVal = "0.0";
-    } else if (clicked.equals(".")) {
-      if (!displayVal.contains(".")) {
+    } else {
+      if (clicked.equals("E")) { //E stands for Enter
+        //Perform calculation
+        performCalc();
+      } else if (clicked.equals("+") || clicked.equals("-") ||
+        clicked.equals("x") || clicked.equals("÷") || clicked.equals("^")) {
+        op = clicked;
+        left = false;
+        newEntry = true;
+        displayVal = op;
+      } else if (clicked.equals("±")) {
         if (left) {
-          displayVal += ".";
-          l = float(displayVal);
+          l *= -1;
+          displayVal = str(l);
         } else {
-          displayVal += ".";
-          r = float(displayVal);
+          r *= -1;
+          displayVal = str(r);
         }
-      }
-    } else if (clicked.equals("c")) { //c stands for cosine
-      if (left) {
-        result = cos(l);
-        l = cos(l);
-        displayVal = str(result);
-      } else {
-        result = cos(r);
-        r = cos(r);
-        displayVal = str(result);
-      }
-    } else if (clicked.equals("s")) { //s stands for sine
-      if (left) {
-        result = sin(l);
-        l = sin(l);
-        displayVal = str(result);
-      } else {
-        result = sin(r);
-        r = sin(r);
-        displayVal = str(result);
-      }
-    } else if (clicked.equals("l")) { //l stands for ln
-      if (left) {
-        if (l <= 0) {
-          displayVal = "ERROR: UNDEFINED";
-          newEntry = true;
+      } else if (clicked.equals("C")) { //C stands for Clear
+        l = 0.0;
+        r = 0.0;
+        result = 0.0;
+        op = " ";
+        left = true;
+        newEntry = true;
+        displayVal = "0.0";
+      } else if (clicked.equals(".")) {
+        if (!displayVal.contains(".")) {
+          if (left) {
+            displayVal += ".";
+            l = float(displayVal);
+          } else {
+            displayVal += ".";
+            r = float(displayVal);
+          }
+        }
+      } else if (clicked.equals("c")) { //c stands for cosine
+        if (left) {
+          result = cos(l);
+          l = cos(l);
+          displayVal = str(result);
         } else {
-          result = log(l);
-          l = log(l);
+          result = cos(r);
+          r = cos(r);
           displayVal = str(result);
         }
-      } else {
-        if (r <= 0) {
-          displayVal = "ERROR: UNDEFINED";
-          newEntry = true;
-        } else {
-          result = log(r);
-          r = log(r);
+      } else if (clicked.equals("s")) { //s stands for sine
+        if (left) {
+          result = sin(l);
+          l = sin(l);
           displayVal = str(result);
+        } else {
+          result = sin(r);
+          r = sin(r);
+          displayVal = str(result);
+        }
+      } else if (clicked.equals("l")) { //l stands for ln
+        if (left) {
+          if (l <= 0) {
+            displayVal = "ERROR: UNDEFINED";
+            newEntry = true;
+            op = " ";
+          } else {
+            result = log(l);
+            l = log(l);
+            displayVal = str(result);
+          }
+        } else {
+          if (r <= 0) {
+            displayVal = "ERROR: UNDEFINED";
+            newEntry = true;
+            op = " ";
+          } else {
+            result = log(r);
+            r = log(r);
+            displayVal = str(result);
+          }
         }
       }
     }
