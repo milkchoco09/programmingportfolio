@@ -178,7 +178,7 @@ void handleEvent(char label, boolean isNum) {
     // Number stuff
     String digit = str(label);
 
-    if (newEntry || displayVal.equals("Infinity")) {
+    if (newEntry || displayVal.equals("Infinity") || displayVal.contains("E")) {
       displayVal = digit;
       newEntry = false;
     } else {
